@@ -371,19 +371,7 @@ public class SmoothAppBarLayout extends AppBarLayout {
     }
 
     protected int getMinOffset(AppBarLayout layout) {
-      int minOffset = layout.getMeasuredHeight();
-      if (mScrollFlag != null) {
-        if (mScrollFlag.isFlagScrollEnabled()) {
-          minOffset = layout.getMeasuredHeight() - getMinHeight(layout, false);
-        }
-      }
-      if (ViewCompat.getFitsSystemWindows(layout)) {
-        if (mStatusBarSize == 0) {
-          mStatusBarSize = Utils.getStatusBarSize(layout.getContext());
-        }
-        minOffset -= mStatusBarSize;
-      }
-      return -Math.max(minOffset, 0);
+      return -layout.getTotalScrollRange();
     }
 
     private int getMinHeight(AppBarLayout layout, boolean forceQuickReturn) {
